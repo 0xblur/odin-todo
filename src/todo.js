@@ -56,6 +56,7 @@ class ToDoInterface {
   }
   projects = [new ToDoProject("default"), "default"]; // Array of project objects
 
+  //DONE
   createNewProject(projectData) {
     const project = new ToDoProject(projectData);
     this.projects.push(project)
