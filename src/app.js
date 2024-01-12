@@ -17,3 +17,4 @@ class App {
 }
 
 const app = new App();
+window["app"] = app;
