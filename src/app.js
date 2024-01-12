@@ -16,8 +16,4 @@ class App {
   }
 }
 
-// app.init();
-//
-//
 const app = new App();
-console.log({ app })
