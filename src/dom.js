@@ -1,5 +1,9 @@
 class DOMInterface {
 
+  constructor() {
+    // Initialize event listeners
+    this.openNewProjectDialog();
+  }
   renderNewProjectDialog() {
     const dialog = document.createElement("dialog");
     dialog.classList.add("dialog");
@@ -40,6 +44,13 @@ class DOMInterface {
       dialog.close()
     });
 
+
+  //INFO: EVENTS
+  openNewProjectDialog() {
+    const newProjectBtn = document.querySelector("#new-project");
+    newProjectBtn.addEventListener("click", () => {
+      this.renderNewProjectDialog();
+    })
   }
 
 };
