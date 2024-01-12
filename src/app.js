@@ -1,3 +1,5 @@
+import "normalize.css";
+import "./style.css";
 import { ToDoInterface } from "./todo.js";
 
 class App {
@@ -14,7 +16,6 @@ class App {
   }
 }
 
-// const app = new App();
 // app.init();
 //
 //
