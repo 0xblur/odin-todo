@@ -13,22 +13,37 @@ class DOMInterface {
 
     const form = document.createElement("form")
     form.setAttribute("method", "dialog");
-    const nameField = document.createElement("input");
     const nameLabel = document.createElement("label");
-    const descField = document.createElement("textarea");
+    const nameField = document.createElement("input");
+    nameLabel.textContent = "Name: ";
+    nameField.setAttribute("type", "text");
+    nameField.setAttribute("required", "");
+    nameLabel.append(nameField);
     const descLabel = document.createElement("label");
-    const colorField = document.createElement("input");
+    const descField = document.createElement("textarea");
+    descLabel.textContent = "Description: ";
+    descField.setAttribute("required", "");
+    descLabel.append(descField);
     const colorLabel = document.createElement("label");
+    const colorField = document.createElement("input");
+    colorLabel.textContent = "Color: ";
+    colorField.setAttribute("type", "color");
+    colorLabel.append(colorField);
     const btnsDiv = document.createElement("div");
     const submitBtn = document.createElement("button");
+    submitBtn.setAttribute("type", "submit");
+    submitBtn.textContent = "+";
     const closeBtn = document.createElement("button");
+    closeBtn.textContent = "-";
 
-    dialog.append(h3, form, btnsDiv);
-    form.append(nameField, descField, colorField);
+
+    btnsDiv.append(submitBtn, closeBtn);
+    dialog.append(h3, form);
+    form.append(nameLabel, descLabel, colorLabel, btnsDiv);
+
 
     //DONE
     submitBtn.addEventListener("click", (e) => {
-      e.preventDefault()
       const project = {};
       project.name = nameField.value;
       project.desc = descField.value;
@@ -36,14 +51,21 @@ class DOMInterface {
 
       const event = new CustomEvent("newProject", { detail: project });
       document.dispatchEvent(event);
+
+      dialog.close()
     });
 
     //DONE
     closeBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      dialog.close()
+      dialog.close();
+      dialog.remove();
     });
 
+    document.body.append(dialog);
+    dialog.showModal();
+
+  }
 
   //INFO: EVENTS
   openNewProjectDialog() {
