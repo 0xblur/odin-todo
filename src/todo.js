@@ -52,7 +52,7 @@ class ToDoItem {
 class ToDoInterface {
   constructor() {
     this.dom = new DOMInterface();
-    document.addEventListener("newProject", this.createNewProject)
+    document.addEventListener("newProject", (e) => this.createNewProject(e.detail))
   }
   projects = [new ToDoProject("default"), "default"]; // Array of project objects
 
