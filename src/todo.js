@@ -81,8 +81,8 @@ class ToDoInterface {
     })
   };
 
-  createNewItem(projectId = "default") {
-    const item = new ToDoItem(projectId);
+  createNewTask(projectId = "default") {
+    const task = new ToDoItem(projectId);
 
   }
 
@@ -110,11 +110,11 @@ class ToDoProject {
     return this.#name;
   }
 
-  set description(string) {
+  set desc(string) {
     this.#desc = string;
   }
 
-  get description() {
+  get desc() {
     return this.#desc
   }
 
