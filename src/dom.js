@@ -5,6 +5,10 @@ class DOMInterface {
     this.openNewProjectDialog();
   }
   renderNewProjectDialog() {
+    //TODO: Add form validation for required fields
+    //TODO: Style form
+    //TODO: Style buttons
+
     const dialog = document.createElement("dialog");
     dialog.classList.add("dialog");
 
@@ -13,22 +17,26 @@ class DOMInterface {
 
     const form = document.createElement("form")
     form.setAttribute("method", "dialog");
+
     const nameLabel = document.createElement("label");
     const nameField = document.createElement("input");
     nameLabel.textContent = "Name: ";
     nameField.setAttribute("type", "text");
     nameField.setAttribute("required", "");
     nameLabel.append(nameField);
+
     const descLabel = document.createElement("label");
     const descField = document.createElement("textarea");
     descLabel.textContent = "Description: ";
     descField.setAttribute("required", "");
     descLabel.append(descField);
+
     const colorLabel = document.createElement("label");
     const colorField = document.createElement("input");
     colorLabel.textContent = "Color: ";
     colorField.setAttribute("type", "color");
     colorLabel.append(colorField);
+
     const btnsDiv = document.createElement("div");
     const submitBtn = document.createElement("button");
     submitBtn.setAttribute("type", "submit");
