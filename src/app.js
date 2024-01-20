@@ -1,14 +1,14 @@
 import { DOMInterface } from "./dom.js";
 
 class ToDoItem {
-	// Fields
-	#id;
-	#name;
-	#desc;
-	#creationDate;
-	#dueDate;
-	#priority;
-	#project;
+  // Fields
+  #id;
+  #name;
+  #desc;
+  #creationDate;
+  #dueDate;
+  #priority;
+  #project;
 
   init() {
     // Create new project
