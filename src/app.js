@@ -1,11 +1,14 @@
-import "normalize.css";
-import "./style.css";
-import { ToDoInterface } from "./todo.js";
+import { DOMInterface } from "./dom.js";
 
-class App {
-  constructor() {
-    this.todo = new ToDoInterface();
-  }
+class ToDoItem {
+	// Fields
+	#id;
+	#name;
+	#desc;
+	#creationDate;
+	#dueDate;
+	#priority;
+	#project;
 
   init() {
     // Create new project
