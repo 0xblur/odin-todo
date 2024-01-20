@@ -1,4 +1,4 @@
-import { DOMInterface } from "./dom.js";
+import * as dom from "./dom.js";
 
 class ToDoItem {
   // Fields
@@ -82,7 +82,6 @@ class ToDo {
 
   constructor() {
     //Init DOM interface
-    this.dom = new DOMInterface();
     //Create default project
     this.createDefaultProject();
     //Custom events
@@ -93,7 +92,7 @@ class ToDo {
       this.createNewTask(e.detail, e.detail.project),
     );
     document.addEventListener("allTasks", () =>
-      this.dom.renderAllTasks(this.projects),
+      dom.renderer.renderAllTasks(this.projects),
     );
   }
 
@@ -101,7 +100,7 @@ class ToDo {
   createNewProject(projectData) {
     const project = new ToDoProject(projectData);
     this.projects.push(project);
-    this.dom.renderProjects(this.projects);
+    dom.renderer.renderProjects(this.projects);
   }
 
   //DONE
@@ -111,7 +110,7 @@ class ToDo {
       color: "#808080",
     });
     this.projects.push(project);
-    this.dom.renderProjects(this.projects);
+    dom.renderer.renderProjects(this.projects);
   }
 
   /**
@@ -144,7 +143,7 @@ class ToDo {
     const task = new ToDoItem(data, project);
     project.tasks.push(task);
     //TODO: Implement rendering with an observer or a dedicated object.
-    this.dom.renderProjectTasks(project);
+    dom.renderer.renderProjectTasks(project);
   }
 }
 

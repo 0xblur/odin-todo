@@ -2,14 +2,14 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/app.js",
+  entry: "./src/main.js",
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/template.html",
       title: "TuDuApp",
       filename: "index.html",
       inject: "body",
-    })
+    }),
   ],
   output: {
     filename: "main.js",
@@ -20,10 +20,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          "style-loader",
-          "css-loader"
-        ]
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -35,4 +32,4 @@ module.exports = {
       },
     ],
   },
-}
+};
