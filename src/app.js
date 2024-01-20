@@ -16,7 +16,13 @@ class ToDoItem {
     // projectBtn.addEventListener("click", (e) => {
     //   this.todo.dom.createNewProject();
     // })
+  //DONE
+  createNewProject(projectData) {
+    const project = new ToDoProject(projectData);
+    this.projects.push(project);
+    this.dom.renderProjects(this.projects);
   }
+
 }
 
 const app = new App();
