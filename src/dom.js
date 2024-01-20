@@ -72,6 +72,27 @@ class DOMInterface {
 
     document.body.append(dialog);
     dialog.showModal();
+  //DONE
+  renderAddNewTaskBtn(project) {
+    const tasksHeader = document.querySelector("#tasks-header");
+
+    // We don't want to collide with a previous button render
+    // or with the initial button rendering.
+    let newTaskBtn = document.querySelector("#new-task");
+    if (newTaskBtn) {
+      newTaskBtn.remove();
+    }
+    newTaskBtn = document.createElement("button");
+    newTaskBtn.id = "new-task";
+    newTaskBtn.textContent = "+";
+    tasksHeader.append(newTaskBtn);
+
+    // A new click listener is initialized in every button
+    // rendering because the referenced project can change.
+    newTaskBtn.addEventListener("click", () => {
+      this.renderNewTaskDialog(project);
+    });
+  }
 
   renderNewTaskDialog(project) {
     const dialog = document.createElement("dialog");
