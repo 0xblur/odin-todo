@@ -136,10 +136,14 @@ class ToDo {
       }
     }
   }
-
-  createNewTask(taskData, project) {
-    const task = new ToDoItem(taskData, project);
+  /**
+   * @param {object} data - object literal with homonimous properties.
+   * @param {ToDoProject} project - the project in which you'll introduce the task.
+   */
+  createNewTask(data, project) {
+    const task = new ToDoItem(data, project);
     project.tasks.push(task);
+    //TODO: Implement rendering with an observer or a dedicated object.
     this.dom.renderProjectTasks(project);
   }
 }
