@@ -148,3 +148,50 @@ class ToDo {
   }
 }
 
+class ToDoProject {
+  #name;
+  #desc;
+  #color;
+  #id;
+  #tasks = [];
+
+  constructor(data) {
+    this.name = data.name;
+    this.desc = data.desc;
+    this.color = data.color || "#808080";
+    this.#id = Utils.genUniqueId();
+  }
+
+  set name(string) {
+    this.#name = string;
+  }
+
+  get name() {
+    return this.#name;
+  }
+
+  set desc(string) {
+    this.#desc = string;
+  }
+
+  get desc() {
+    return this.#desc;
+  }
+
+  get id() {
+    return this.#id;
+  }
+
+  set color(newColor) {
+    this.#color = newColor;
+  }
+
+  get color() {
+    return this.#color;
+  }
+
+  get tasks() {
+    return this.#tasks;
+  }
+}
+
