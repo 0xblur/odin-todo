@@ -10,12 +10,6 @@ class ToDoItem {
   #priority;
   #project;
 
-  init() {
-    // Create new project
-    // const projectBtn = document.querySelector(".create-project");
-    // projectBtn.addEventListener("click", (e) => {
-    //   this.todo.dom.createNewProject();
-    // })
   //DONE
   createNewProject(projectData) {
     const project = new ToDoProject(projectData);
