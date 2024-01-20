@@ -82,7 +82,6 @@ class ToDo {
   projects = []; // Array of project objects
 
   constructor() {
-    //Init DOM interface
     //Create default project
     this.createDefaultProject();
     //Custom events
