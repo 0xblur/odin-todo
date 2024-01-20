@@ -33,6 +33,16 @@ class ToDoItem {
     this.dom.renderProjects(this.projects);
   }
 
+  setProjectName(project, newName) {
+    for (const project of this.projects) {
+      if (project.id === projectId) {
+        project.name = newName;
+      } else {
+        console.error(`Project with ID "${projectId}" hasn't been found`);
+      }
+    }
+  }
+
 }
 
 const app = new App();
