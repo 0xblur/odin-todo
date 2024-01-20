@@ -195,3 +195,11 @@ class ToDoProject {
   }
 }
 
+class Utils {
+  //INFO: Useful functions used by most classes. It must be moved
+  // into its appropiate module.
+  static genUniqueId() {
+    return Date.now().toString(36) + Math.random().toString(36).substring(2);
+  }
+}
+
