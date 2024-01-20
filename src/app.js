@@ -23,6 +23,16 @@ class ToDoItem {
     this.dom.renderProjects(this.projects);
   }
 
+  //DONE
+  createDefaultProject() {
+    const project = new ToDoProject({
+      name: "Default Project",
+      color: "#808080",
+    });
+    this.projects.push(project);
+    this.dom.renderProjects(this.projects);
+  }
+
 }
 
 const app = new App();
