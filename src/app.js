@@ -77,6 +77,26 @@ class ToDoItem {
   }
 }
 
+class ToDo {
+  projects = []; // Array of project objects
+
+  constructor() {
+    //Init DOM interface
+    this.dom = new DOMInterface();
+    //Create default project
+    this.createDefaultProject();
+    //Custom events
+    document.addEventListener("newProject", (e) =>
+      this.createNewProject(e.detail),
+    );
+    document.addEventListener("newTask", (e) =>
+      this.createNewTask(e.detail, e.detail.project),
+    );
+    document.addEventListener("allTasks", () =>
+      this.dom.renderAllTasks(this.projects),
+    );
+  }
+
   //DONE
   createNewProject(projectData) {
     const project = new ToDoProject(projectData);
@@ -94,6 +114,10 @@ class ToDoItem {
     this.dom.renderProjects(this.projects);
   }
 
+  /**
+   * @param {ToDoProject} project
+   * @param {string} newName
+   */
   setProjectName(project, newName) {
     for (const project of this.projects) {
       if (project.id === projectId) {
@@ -104,7 +128,19 @@ class ToDoItem {
     }
   }
 
+  // Gets projectId and newColor variables from DOMInterface
+  setProjectColor(project, newColor) {
+    for (const project of this.projects) {
+      if (project.id === projectId) {
+        project.color = newColor;
+      }
+    }
+  }
+
+  createNewTask(taskData, project) {
+    const task = new ToDoItem(taskData, project);
+    project.tasks.push(task);
+    this.dom.renderProjectTasks(project);
+  }
 }
 
-const app = new App();
-window["app"] = app;
