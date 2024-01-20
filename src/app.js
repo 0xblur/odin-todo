@@ -1,3 +1,4 @@
+import { genUniqueId } from "./utils.js";
 import * as dom from "./dom.js";
 
 class ToDoItem {
@@ -15,7 +16,7 @@ class ToDoItem {
    * @param {ToDoProject} project - project parent
    */
   constructor(data, project) {
-    this.#id = Utils.genUniqueId();
+    this.#id = genUniqueId();
     this.#name = data.name;
     this.#desc = data.desc;
     this.#creationDate = data.creationDate;
@@ -158,7 +159,7 @@ class ToDoProject {
     this.name = data.name;
     this.desc = data.desc;
     this.color = data.color || "#808080";
-    this.#id = Utils.genUniqueId();
+    this.#id = genUniqueId();
   }
 
   set name(string) {
@@ -191,14 +192,6 @@ class ToDoProject {
 
   get tasks() {
     return this.#tasks;
-  }
-}
-
-class Utils {
-  //INFO: Useful functions used by most classes. It must be moved
-  // into its appropiate module.
-  static genUniqueId() {
-    return Date.now().toString(36) + Math.random().toString(36).substring(2);
   }
 }
 

@@ -1,3 +1,4 @@
+import { generateRandomHEXColor } from "./utils";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 
 class Templater {
@@ -322,11 +323,6 @@ function init() {
       document.dispatchEvent(event);
     });
   }
-}
-
-// Utility function
-function generateRandomHEXColor() {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
 const renderer = new Renderer();
