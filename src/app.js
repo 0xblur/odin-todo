@@ -10,6 +10,73 @@ class ToDoItem {
   #priority;
   #project;
 
+  /**
+   * @param {object} data - object literal with homonimous fields.
+   * @param {ToDoProject} project - project parent
+   */
+  constructor(data, project) {
+    this.#id = Utils.genUniqueId();
+    this.#name = data.name;
+    this.#desc = data.desc;
+    this.#creationDate = data.creationDate;
+    this.#dueDate = data.dueDate;
+    this.#priority = data.priority;
+    this.#project = project;
+  }
+
+  get id() {
+    return this.#id;
+  }
+
+  set name(string) {
+    this.#name = string;
+  }
+
+  get name() {
+    return this.#name;
+  }
+
+  set desc(string) {
+    this.#desc = string;
+  }
+
+  get desc() {
+    return this.#desc;
+  }
+
+  set dueDate(date) {
+    this.#dueDate = date;
+  }
+
+  get dueDate() {
+    return this.#dueDate;
+  }
+
+  set priority(string) {
+    this.#priority = string;
+  }
+
+  get priority() {
+    return this.#priority;
+  }
+
+  set project(string) {
+    this.#project = string;
+  }
+
+  get project() {
+    return this.#project;
+  }
+
+  get creationDate() {
+    return this.#creationDate;
+  }
+
+  set creationDate(date) {
+    this.#creationDate = date;
+  }
+}
+
   //DONE
   createNewProject(projectData) {
     const project = new ToDoProject(projectData);
