@@ -71,16 +71,36 @@ class Templater {
     dueDateDiv.classList.add("task-due-date");
     dueDateDiv.textContent = `Due: ${diff}`;
 
-    //Expanded view
-    const expandedContent = document.createElement("div");
-    expandedContent.classList.add("expanded-content", "hidden");
-    expandedContent.append(desc, dueDateDiv);
-
     const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
     editBtn.classList.add("edit-btn");
 
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "Delete";
+    delBtn.classList.add("del-btn");
+
+    const btnsDiv = document.createElement("div");
+    btnsDiv.classList.add("task-btns");
+    btnsDiv.append(editBtn, delBtn);
+
+    //Expanded view
+    const expandedContent = document.createElement("div");
+    expandedContent.classList.add("expandable", "hidden");
+    expandedContent.append(desc, dueDateDiv, btnsDiv);
+
+    //TODO: Implement edit task dialog
     editBtn.addEventListener("click", () => {
       renderer.renderEditTaskDialog(task);
+    });
+
+    delBtn.addEventListener("click", () => {
+      const event = new CustomEvent("deleteTask", {
+        detail: {
+          project: task.project,
+          task: task,
+        },
+      });
+      document.dispatchEvent(event);
     });
 
     taskDiv.addEventListener("click", () => {
@@ -207,7 +227,12 @@ class Renderer {
       taskData.dueDate = dueDateField.value;
       taskData.project = project;
 
-      const event = new CustomEvent("newTask", { detail: taskData });
+      const event = new CustomEvent("newTask", {
+        detail: {
+          data: taskData,
+          project: project,
+        },
+      });
       document.dispatchEvent(event);
 
       dialog.close();
@@ -224,8 +249,8 @@ class Renderer {
   }
 
   expandTask(task) {
-    const expandedContent = task.querySelector(".expanded-content");
-    expandedContent.classList.toggle("hidden");
+    const expandableContent = task.querySelector(".expandable");
+    expandableContent.classList.toggle("hidden");
     task.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
