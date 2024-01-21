@@ -17,7 +17,7 @@ class Templater {
     p.classList.add("project-desc", "hidden");
     p.textContent = project.desc;
     const btnsDiv = document.createElement("div");
-    btnsDiv.classList.add("project-btns", "hidden");
+    btnsDiv.classList.add("project-btns", "hidden", "expandable");
     const editBtn = document.createElement("button");
     editBtn.classList.add("edit-btn");
     editBtn.textContent = "Edit";
@@ -31,9 +31,21 @@ class Templater {
     projectDiv.addEventListener("click", () => {
       renderer.renderProjectTasks(project);
       renderer.renderAddNewTaskBtn(project);
+      renderer.expandProject(projectDiv);
     });
-    //TODO: Implement project editing
-    //TODO: Implement project deletion
+
+    editBtn.addEventListener("click", () => {
+      renderer.renderEditProjectDialog(project);
+    });
+
+    delBtn.addEventListener("click", () => {
+      const event = new CustomEvent("deleteProject", {
+        detail: {
+          project: project,
+        },
+      });
+      document.dispatchEvent(event);
+    });
 
     return projectDiv;
   }
