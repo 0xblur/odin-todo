@@ -254,8 +254,22 @@ class Renderer {
     task.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
+  /**
+   * @param {HTMLDivElement} project
+   */
+  expandProject(project) {
+    const expandableContent = project.querySelector(".expandable");
+    expandableContent.classList.toggle("hidden");
+    project.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  /**
+   * @param {Array} projects
+   */
   renderAllTasks(projects) {
     const tasksDiv = document.querySelector("#tasks");
+    const tasksHeader = document.querySelector("#tasks-header>h2");
+    tasksHeader.textContent = "All tasks";
     tasksDiv.innerHTML = "";
     for (const project of projects) {
       for (const task of project.tasks) {
@@ -321,6 +335,80 @@ class Renderer {
       projectData.color = colorField.value;
 
       const event = new CustomEvent("newProject", { detail: projectData });
+      document.dispatchEvent(event);
+
+      dialog.close();
+    });
+
+    closeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      dialog.close();
+      dialog.remove();
+    });
+
+    // Returns constructed dialog and shows it to the user.
+    document.body.append(dialog);
+    dialog.showModal();
+  }
+  renderEditProjectDialog(project) {
+    // Dialog construction
+    const dialog = document.createElement("dialog");
+    dialog.classList.add("dialog");
+
+    const h3 = document.createElement("h3");
+    h3.textContent = `${project.name}`;
+
+    const form = document.createElement("form");
+    form.setAttribute("method", "dialog");
+
+    const nameLabel = document.createElement("label");
+    const nameField = document.createElement("input");
+    nameLabel.textContent = "Name: ";
+    nameField.setAttribute("type", "text");
+    nameField.setAttribute("required", "");
+    nameField.value = project.name;
+    nameLabel.append(nameField);
+
+    const descLabel = document.createElement("label");
+    const descField = document.createElement("textarea");
+    descField.value = project.desc || "";
+    descLabel.textContent = "Description: ";
+    descLabel.append(descField);
+
+    const colorLabel = document.createElement("label");
+    const colorField = document.createElement("input");
+    colorLabel.textContent = "Color: ";
+    colorField.setAttribute("type", "color");
+    colorField.value = project.color;
+    colorLabel.append(colorField);
+
+    const btnsDiv = document.createElement("div");
+    btnsDiv.classList.add("dialog-btns");
+    const submitBtn = document.createElement("button");
+    submitBtn.classList.add("submit-btn");
+    submitBtn.setAttribute("type", "submit");
+    submitBtn.textContent = "+";
+    const closeBtn = document.createElement("button");
+    closeBtn.classList.add("cancel-btn");
+    closeBtn.textContent = "-";
+
+    btnsDiv.append(submitBtn, closeBtn);
+    form.append(nameLabel, descLabel, colorLabel, btnsDiv);
+    dialog.append(h3, form);
+
+    // Dialog event listeners
+    submitBtn.addEventListener("click", (e) => {
+      const projectData = {};
+      projectData.name = nameField.value;
+      projectData.desc = descField.value;
+      projectData.color = colorField.value;
+
+      const event = new CustomEvent("editProject", {
+        detail: {
+          data: projectData,
+          project: project,
+        },
+      });
       document.dispatchEvent(event);
 
       dialog.close();
