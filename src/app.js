@@ -178,6 +178,13 @@ class ToDo {
     //TODO: Implement rendering with an observer or a dedicated object.
     dom.renderer.renderProjectTasks(project);
   }
+
+  deleteTask(project, task) {
+    const tasks = project.tasks;
+    const index = tasks.indexOf(task);
+    tasks.splice(index, 1);
+    dom.renderer.renderProjectTasks(project);
+  }
 }
 
 class ToDoProject {
