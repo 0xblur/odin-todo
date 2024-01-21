@@ -79,7 +79,7 @@ class ToDoItem {
 }
 
 class ToDo {
-  projects = []; // Array of project objects
+  #projects = []; // Array of project objects
 
   constructor() {
     //Create default project
@@ -89,11 +89,28 @@ class ToDo {
       this.createNewProject(e.detail),
     );
     document.addEventListener("newTask", (e) =>
-      this.createNewTask(e.detail, e.detail.project),
+      this.createNewTask(e.detail.data, e.detail.project),
     );
     document.addEventListener("allTasks", () =>
       dom.renderer.renderAllTasks(this.projects),
     );
+    document.addEventListener("editProject", (e) =>
+      this.editProject(e.detail.project, e.detail.data),
+    );
+    document.addEventListener("deleteProject", (e) =>
+      this.deleteProject(e.detail.project),
+    );
+    document.addEventListener("deleteTask", (e) =>
+      this.deleteTask(e.detail.project, e.detail.task),
+    );
+  }
+
+  get projects() {
+    return this.#projects;
+  }
+
+  set projects(arr) {
+    this.#projects = arr;
   }
 
   //DONE
@@ -111,6 +128,22 @@ class ToDo {
     });
     this.projects.push(project);
     dom.renderer.renderProjects(this.projects);
+  }
+
+  editProject(project, data) {
+    project.name = data.name || project.name;
+    project.desc = data.desc || project.desc;
+    project.color = data.color || project.color;
+    dom.renderer.renderProjects(this.projects);
+    dom.renderer.renderProjectTasks(project);
+  }
+
+  deleteProject(projectToDelete) {
+    const projects = this.projects;
+    const i = projects.indexOf(projectToDelete);
+    projects.splice(i, 1);
+    dom.renderer.renderProjects(this.projects);
+    dom.renderer.renderAllTasks(this.projects);
   }
 
   /**
